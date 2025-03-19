@@ -1,0 +1,42 @@
+plugins {
+    id "com.android.application" version "8.1.0" // Matches root build.gradle
+    id "org.jetbrains.kotlin.android" version "1.9.22" // Matches ext.kotlin_version
+    id "dev.flutter.flutter-gradle-plugin" // Managed by Flutter SDK
+    id "com.google.gms.google-services" // Managed by root build.gradle (4.4.1)
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+android {
+    namespace "com.fabspin.drycleaners"
+    compileSdk 34
+    defaultConfig {
+        applicationId "com.fabspin.drycleaners"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+flutter {
+    source "../.."
+}
+
+dependencies {
+    implementation "androidx.multidex:multidex:2.0.1"
+}

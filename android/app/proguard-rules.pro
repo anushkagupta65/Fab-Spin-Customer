@@ -1,0 +1,5 @@
+-keep class com.google.android.gms.** { *; }
+-keep class io.flutter.** { *; }
+-keep class com.baseflow.** { *; }
+-keep class androidx.lifecycle.** { *; }
+-dontwarn androidx.lifecycle.**
