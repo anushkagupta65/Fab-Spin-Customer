@@ -29,14 +29,13 @@ class _PrizeListState extends State<PrizeList> {
       final jsonData = json.decode(response.body);
       setState(() {
         priceList = jsonData;
-        serviceName = priceList
-            .map((price) => price["service_name"])
-            .toSet()
-            .toList();
+        serviceName =
+            priceList.map((price) => price["service_name"]).toSet().toList();
       });
       if (serviceName.isNotEmpty) {
         selectedService = serviceName[0];
-        filterClothesByService(selectedService!); // Automatically filter by the first service
+        filterClothesByService(
+            selectedService!); // Automatically filter by the first service
       }
     }
   }
@@ -64,7 +63,8 @@ class _PrizeListState extends State<PrizeList> {
         selectedSubtrade = uniqueSubtrades[0];
         filterClothesBySubtrade(selectedSubtrade!);
       } else {
-        filteredClothes = []; // Clear filtered clothes if no categories are found
+        filteredClothes =
+            []; // Clear filtered clothes if no categories are found
       }
     });
   }
@@ -75,8 +75,8 @@ class _PrizeListState extends State<PrizeList> {
       selectedSubtrade = subtradeName;
       filteredClothes = priceList
           .where((price) =>
-      price["service_name"] == selectedService &&
-          price["category"] == subtradeName)
+              price["service_name"] == selectedService &&
+              price["category"] == subtradeName)
           .toList();
     });
   }
@@ -95,7 +95,6 @@ class _PrizeListState extends State<PrizeList> {
               color: Colors.white,
               letterSpacing: 1,
               fontSize: 20,
-              //fontWeight: FontWeight.bold,
             ),
           ),
         ),
@@ -104,7 +103,8 @@ class _PrizeListState extends State<PrizeList> {
         actions: [
           Badge(
             backgroundColor: Colors.grey,
-            label: Text(walletAmount.substring(0, walletAmount.length - 3), style: TextStyle(color: Colors.white)),
+            label: Text(walletAmount.substring(0, walletAmount.length - 3),
+                style: TextStyle(color: Colors.white)),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -134,13 +134,6 @@ class _PrizeListState extends State<PrizeList> {
       ),
       drawer: CustomDrawer(),
       body: Container(
-        // decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //     opacity: 0.09,
-        //     image: AssetImage("assets/images/bg.jpg"),
-        //     fit: BoxFit.cover,
-        //   ),
-        // ),
         child: Column(
           children: [
             SizedBox(
@@ -170,7 +163,6 @@ class _PrizeListState extends State<PrizeList> {
                             color: Colors.white,
                             letterSpacing: 1,
                             fontSize: 15,
-                            //fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -206,7 +198,6 @@ class _PrizeListState extends State<PrizeList> {
                             color: Colors.white,
                             letterSpacing: 1,
                             fontSize: 15,
-                            //fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -221,7 +212,9 @@ class _PrizeListState extends State<PrizeList> {
                 itemBuilder: (context, index) {
                   final clothe = filteredClothes[index];
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                    ),
                     child: Container(
                       decoration: BoxDecoration(
                         //borderRadius: BorderRadius.circular(5),
@@ -241,7 +234,6 @@ class _PrizeListState extends State<PrizeList> {
                                 color: Colors.black,
                                 letterSpacing: 1,
                                 fontSize: 13,
-                                //fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
@@ -251,7 +243,6 @@ class _PrizeListState extends State<PrizeList> {
                                 color: Colors.black,
                                 letterSpacing: 1,
                                 fontSize: 13,
-                                //fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
@@ -268,4 +259,3 @@ class _PrizeListState extends State<PrizeList> {
     );
   }
 }
-

@@ -1,5 +1,4 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Future<bool> checkConnectivity() async {
@@ -14,7 +13,8 @@ Future<bool> checkConnectivity() async {
   }
 }
 
-void showSnackBarView(BuildContext context, String message, Color backGroundColor) {
+void showSnackBarView(
+    BuildContext context, String message, Color backGroundColor) {
   SnackBar snackBarContent = SnackBar(
     content: Text(
       message,

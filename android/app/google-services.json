@@ -42,6 +42,44 @@
           "other_platform_oauth_client": []
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524186862235:android:c11b344e2f969ce506fc3e",
+        "android_client_info": {
+          "package_name": "com.fabspin.rider"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCryR1jADfZ_bt_qXOAQWyAYJ_-9F2I-hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524186862235:android:edffdb3f89bcbc9a06fc3e",
+        "android_client_info": {
+          "package_name": "com.rider.fabspin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCryR1jADfZ_bt_qXOAQWyAYJ_-9F2I-hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
     }
   ],
   "configuration_version": "1"

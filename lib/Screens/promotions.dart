@@ -19,7 +19,9 @@ class Promotions extends StatefulWidget {
   State<Promotions> createState() => _PromotionsState();
 }
 
-class _PromotionsState extends State<Promotions> with SingleTickerProviderStateMixin implements PaymentService {
+class _PromotionsState extends State<Promotions>
+    with SingleTickerProviderStateMixin
+    implements PaymentService {
   TabController? tabController;
   List<dynamic> getpromotions = [];
   List<bool> isAppliedList = [];
@@ -101,7 +103,6 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
               color: Colors.white,
               letterSpacing: 1,
               fontSize: 20,
-              //fontWeight: FontWeight.bold,
             ),
           ),
         ),
@@ -110,7 +111,8 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
         actions: [
           Badge(
             backgroundColor: Colors.grey,
-            label: Text(walletAmount.substring(0, walletAmount.length - 3), style: TextStyle(color: Colors.white)),
+            label: Text(walletAmount.substring(0, walletAmount.length - 3),
+                style: TextStyle(color: Colors.white)),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -166,7 +168,6 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
                             color: Colors.black,
                             letterSpacing: 1,
                             fontSize: 15,
-                            //fontWeight: FontWeight.bold,
                           ),
                         ),
                         TextField(controller: balanceController),
@@ -184,13 +185,18 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
                                   setState(() {
                                     isAppliedList2[index]
                                         ? balanceController.text = ''
-                                        : balanceController.text = recharge['amount'].toString();
-                                    isAppliedList2[index] = !isAppliedList2[index];
+                                        : balanceController.text =
+                                            recharge['amount'].toString();
+                                    isAppliedList2[index] =
+                                        !isAppliedList2[index];
                                     promotionid = recharge['id'];
                                     promotionamount = recharge['amount'];
                                     title = recharge['title'];
                                     description = recharge['description'];
-                                    balanceController.text = isAppliedList2[index] ? recharge['amount'] : '';
+                                    balanceController.text =
+                                        isAppliedList2[index]
+                                            ? recharge['amount']
+                                            : '';
                                   });
                                 },
                                 child: Padding(
@@ -203,7 +209,8 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
                                       border: Border.all(color: Colors.black),
                                     ),
                                     child: Center(
-                                      child: Text(recharge['amount'].toString()),
+                                      child:
+                                          Text(recharge['amount'].toString()),
                                     ),
                                   ),
                                 ),
@@ -219,7 +226,6 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
                             color: Colors.black,
                             letterSpacing: 1,
                             fontSize: 15,
-                            //fontWeight: FontWeight.bold,
                           ),
                         ),
                         SizedBox(height: 10),
@@ -235,7 +241,9 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
                                 isApplied: isAppliedList[index],
                                 voidCallback: () {
                                   setState(() {
-                                    for (int i = 0; i < isAppliedList.length; i++) {
+                                    for (int i = 0;
+                                        i < isAppliedList.length;
+                                        i++) {
                                       if (i != index) {
                                         isAppliedList[i] = false;
                                       }
@@ -244,8 +252,12 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
                                     promotionamount = promo['amount'];
                                     title = promo['title'];
                                     description = promo['description'];
-                                    isAppliedList[index] = !isAppliedList[index];
-                                    balanceController.text = isAppliedList[index] ? promo['amount'] : '';
+                                    isAppliedList[index] =
+                                        !isAppliedList[index];
+                                    balanceController.text =
+                                        isAppliedList[index]
+                                            ? promo['amount']
+                                            : '';
                                   });
                                 },
                               );
@@ -275,7 +287,6 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
                         color: Colors.white,
                         letterSpacing: 1,
                         fontSize: 15,
-                        //fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -304,7 +315,8 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
 
   @override
   void handlePaymentSuccessEvent(PaymentSuccessResponse successResponse) {
-    savePaymentDetails(successResponse.orderId.toString(), successResponse.paymentId.toString(), amount);
+    savePaymentDetails(successResponse.orderId.toString(),
+        successResponse.paymentId.toString(), amount);
     updateWallet();
     showSnackBarView(context, "Payment Successfully Done", Colors.green);
   }
@@ -320,7 +332,8 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
   }
 
   @override
-  void openRazorPaySession(int price, String productName, String productDescription, String orderId) {
+  void openRazorPaySession(int price, String productName,
+      String productDescription, String orderId) {
     try {
       var options = {
         'key': _razorpayKey,
@@ -343,13 +356,13 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
 
   void createRazorpayOrder() async {
     print("First Call${amount}");
-    // Razorpay API credentials
-    String keyId = _razorpayKey; // Replace with your Razorpay key_id
-    String keySecret = '2mrkDNFBcKI3RgdjjnEqo24r'; // Replace with your Razorpay key_secret
+    String keyId = _razorpayKey;
+    String keySecret =
+        '2mrkDNFBcKI3RgdjjnEqo24r'; // Replace with your Razorpay key_secret
 
     // Body for the request
     Map<String, dynamic> body = {
-      "amount":  amount, // Amount in paise (5000 INR)
+      "amount": amount, // Amount in paise (5000 INR)
       "currency": "INR",
       "receipt": "receipt#1",
       "payment_capture": 1 // Automatically capture the payment
@@ -360,7 +373,8 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
       body: jsonEncode(body), // Convert body to JSON
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Basic ${base64Encode(utf8.encode('$keyId:$keySecret'))}' // Basic Auth header
+        'Authorization':
+            'Basic ${base64Encode(utf8.encode('$keyId:$keySecret'))}' // Basic Auth header
       },
     );
 
@@ -375,17 +389,17 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
       setState(() {
         checkConnectivity().then((value) {
           if (value == false) {
-            showSnackBarView(context, "Please Check Network Connectivity", Colors.red);
+            showSnackBarView(
+                context, "Please Check Network Connectivity", Colors.red);
           } else {
             print('Order ID being passed to Razorpay: $orderId');
             // Pass the dynamically generated orderId from Razorpay
             openRazorPaySession(
-              amount , // Amount in INR
+              amount, // Amount in INR
               title.toString(),
-              description.toString() ?? "Description",
+              description.toString(),
               orderId, // Use the actual order ID
             );
-
           }
         });
       });
@@ -394,8 +408,6 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
       showSnackBarView(context, "Something went wrong", Colors.red);
     }
   }
-
-
 
   @override
   savePaymentDetails(String orderId, String paymentId, int amount) {}
@@ -433,29 +445,30 @@ class _PromotionsState extends State<Promotions> with SingleTickerProviderStateM
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name, style: GoogleFonts.sourceSans3(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                  letterSpacing: 1,
-                  fontSize: 12,
-                  //fontWeight: FontWeight.bold,
-                ),),
+                Text(
+                  name,
+                  style: GoogleFonts.sourceSans3(
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                    letterSpacing: 1,
+                    fontSize: 12,
+                  ),
+                ),
                 wallet > 150
                     ? SizedBox.shrink()
-                    :Text("$discount", style: GoogleFonts.sourceSans3(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey,
-                  letterSpacing: 1,
-                  fontSize: 15,
-                  //fontWeight: FontWeight.bold,
-                ),),
+                    : Text(
+                        "$discount",
+                        style: GoogleFonts.sourceSans3(
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey,
+                          letterSpacing: 1,
+                          fontSize: 15,
+                        ),
+                      ),
               ],
             ),
             Text("₹ $price"),
           ],
-          // title:
-          // subtitle:
-          // trailing:
         ),
       ),
     );

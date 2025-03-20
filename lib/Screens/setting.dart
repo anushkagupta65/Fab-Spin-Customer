@@ -8,9 +8,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../tabs/custom_drawer.dart';
-import 'contact_us.dart';
 import 'notificaton_screen.dart';
 
 class Setting extends StatefulWidget {
@@ -45,8 +43,8 @@ class _SettingState extends State<Setting> {
   void _shareContent() {
     String text = 'Fabspin';
     String url =
-        'https://play.google.com/store/apps/details?id=com.fabspin.drycleaners'; // Your link here
-    Share.share('$text\n$url'); // Sharing both text and link
+        'https://play.google.com/store/apps/details?id=com.fabspin.drycleaners';
+    Share.share('$text\n$url');
   }
 
   @override
@@ -63,7 +61,6 @@ class _SettingState extends State<Setting> {
             color: Colors.white,
             letterSpacing: 1,
             fontSize: 20,
-            //fontWeight: FontWeight.bold,
           ),
         )),
         centerTitle: true,
@@ -108,12 +105,6 @@ class _SettingState extends State<Setting> {
       ),
       drawer: CustomDrawer(),
       body: Container(
-        // decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //     opacity: 0.09,
-        //     image: AssetImage("assets/images/bg.jpg"),
-        //     fit: BoxFit.cover,
-        //   ),),
         child: Column(
           children: [
             InkWell(
@@ -131,7 +122,6 @@ class _SettingState extends State<Setting> {
                     color: Colors.black,
                     letterSpacing: 1,
                     fontSize: 15,
-                    //fontWeight: FontWeight.bold,
                   ),
                 ),
                 leading: Icon(
@@ -156,7 +146,6 @@ class _SettingState extends State<Setting> {
                     color: Colors.black,
                     letterSpacing: 1,
                     fontSize: 15,
-                    //fontWeight: FontWeight.bold,
                   ),
                 ),
                 leading: Icon(
@@ -166,22 +155,6 @@ class _SettingState extends State<Setting> {
               ),
             ),
             Divider(),
-            // InkWell(
-            //   onTap: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(builder: (context) => const ContactUs()),
-            //     );
-            //   },
-            //   child: ListTile(
-            //     title: Text("Contact us"),
-            //     leading: Icon(
-            //       Ionicons.chatbox_ellipses_outline,
-            //       color: Colors.black,
-            //     ),
-            //   ),
-            // ),
-            // Divider(),
             InkWell(
               onTap: () {
                 Navigator.push(
@@ -197,7 +170,6 @@ class _SettingState extends State<Setting> {
                     color: Colors.black,
                     letterSpacing: 1,
                     fontSize: 15,
-                    //fontWeight: FontWeight.bold,
                   ),
                 ),
                 leading: Icon(
@@ -219,7 +191,6 @@ class _SettingState extends State<Setting> {
                     color: Colors.black,
                     letterSpacing: 1,
                     fontSize: 15,
-                    //fontWeight: FontWeight.bold,
                   ),
                 ),
                 leading: Icon(
@@ -241,7 +212,6 @@ class _SettingState extends State<Setting> {
                     color: Colors.black,
                     letterSpacing: 1,
                     fontSize: 15,
-                    //fontWeight: FontWeight.bold,
                   ),
                 ),
                 leading: Icon(
@@ -250,14 +220,6 @@ class _SettingState extends State<Setting> {
                 ),
               ),
             ),
-            // Divider(),
-            // ListTile(
-            //   title: Text("Delete Account"),
-            //   leading: Icon(
-            //     Icons.person,
-            //     color: Colors.black,
-            //   ),
-            // ),
           ],
         ),
       ),

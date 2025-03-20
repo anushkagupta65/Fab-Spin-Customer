@@ -1,8 +1,6 @@
-import 'dart:async'; // Import this to use StreamController
+import 'dart:async';
 import 'dart:convert';
-
 import 'package:fabspin/Screens/add_address.dart';
-import 'package:fabspin/Screens/my_profile.dart';
 import 'package:fabspin/Screens/search_maps.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,7 +12,7 @@ import 'package:http/http.dart' as http;
 import '../Urls/urls.dart';
 
 class MapScreen extends StatefulWidget {
-  final Function(String) onAddressSelected; // Callback function
+  final Function(String) onAddressSelected;
 
   MapScreen({required this.onAddressSelected});
 
@@ -24,12 +22,11 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   GoogleMapController? _controller;
-  LatLng _currentPosition =
-      LatLng(28.614620, 77.033173); // Default location
+  LatLng _currentPosition = LatLng(28.614620, 77.033173);
   bool _loading = true;
   String? _currentAddress;
   int? userId;
-  String zipCode= '';
+  String zipCode = '';
 
   TextEditingController house = TextEditingController();
   TextEditingController street = TextEditingController();
@@ -43,7 +40,6 @@ class _MapScreenState extends State<MapScreen> {
 
   Future<void> _updateAddress() async {
     final url = Uri.parse(Urls.updateAddress);
-    //final url = Uri.parse('https://fabspin.org/api/add-new-address');
     final response = await http.post(
       url,
       body: json.encode({
@@ -54,7 +50,6 @@ class _MapScreenState extends State<MapScreen> {
         'zip': zipCode,
         'lat': _currentPosition.latitude.toString(),
         'long': _currentPosition.longitude.toString(),
-
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -73,9 +68,6 @@ class _MapScreenState extends State<MapScreen> {
     if (response.statusCode == 201) {
       final responseData = json.decode(response.body);
       if (responseData['Status'] == 'Success') {
-
-
-
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const AddAddress()),
@@ -156,14 +148,6 @@ class _MapScreenState extends State<MapScreen> {
     }
   }
 
-  Future<void> _saveAddressToPreferences(String address) async {
-    final prefs = await SharedPreferences.getInstance();
-    final finaladress = house.text + street.text + address;
-    print('Final Address${finaladress}');
-    await prefs.setString('current_address', finaladress);
-    print('Saved Address: $address');
-  }
-
   void _moveToCurrentLocation() {
     _controller?.animateCamera(
       CameraUpdate.newCameraPosition(
@@ -178,26 +162,20 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text('Location', style: GoogleFonts.sourceSans3(
-            fontWeight: FontWeight.w500,
-            color: Colors.white,
-            letterSpacing: 1,
-            fontSize: 20,
-            //fontWeight: FontWeight.bold,
-          ),),
+          title: Text(
+            'Location',
+            style: GoogleFonts.sourceSans3(
+              fontWeight: FontWeight.w500,
+              color: Colors.white,
+              letterSpacing: 1,
+              fontSize: 20,
+            ),
+          ),
           iconTheme: IconThemeData(color: Colors.white),
           centerTitle: true,
-          // actions: [
-          //   IconButton(
-          //     icon: Icon(Icons.check),
-          //     onPressed: () {
-          //       Navigator.pop(context); // Go back to the previous page
-          //     },
-          //   )
-          // ],
         ),
         body: Column(
           children: [
@@ -230,7 +208,6 @@ class _MapScreenState extends State<MapScreen> {
                             color: Colors.black,
                             letterSpacing: 1,
                             fontSize: 15,
-                            //fontWeight: FontWeight.bold,
                           ),
                           textAlign: TextAlign.start,
                         ),
@@ -239,19 +216,22 @@ class _MapScreenState extends State<MapScreen> {
                         child: InkWell(
                           onTap: () async {
                             final selectedLocation = await Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => SearchLocationScreen(_currentPosition.latitude, _currentPosition.longitude),
-                              ));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SearchLocationScreen(
+                                      _currentPosition.latitude,
+                                      _currentPosition.longitude),
+                                ));
 
                             if (selectedLocation != null) {
                               setState(() {
                                 _currentPosition = selectedLocation;
-                                _moveToCurrentLocation(); // Move the camera to the selected location
-                                _getAddressFromLatLng(_currentPosition.latitude, _currentPosition.longitude);
+                                _moveToCurrentLocation();
+                                _getAddressFromLatLng(_currentPosition.latitude,
+                                    _currentPosition.longitude);
                               });
                             }
                           },
-
                           child: Container(
                             decoration: BoxDecoration(
                                 color: Colors.black,
@@ -266,7 +246,6 @@ class _MapScreenState extends State<MapScreen> {
                                   color: Colors.white,
                                   letterSpacing: 1,
                                   fontSize: 12,
-                                  //fontWeight: FontWeight.bold,
                                 ),
                               )),
                             ),
@@ -288,15 +267,12 @@ class _MapScreenState extends State<MapScreen> {
                             decoration: InputDecoration(
                               hintText: "House / Flat / Block / Building",
                               border: InputBorder.none,
-                              hintStyle:
-                                GoogleFonts.sourceSans3(
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
-                                  letterSpacing: 1,
-                                  fontSize: 12,
-                                  //fontWeight: FontWeight.bold,
-                                ),
-
+                              hintStyle: GoogleFonts.sourceSans3(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                                letterSpacing: 1,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                         )),
@@ -304,25 +280,26 @@ class _MapScreenState extends State<MapScreen> {
                   Padding(
                     padding: const EdgeInsets.all(12),
                     child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.black)),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 15),
-                          child: TextField(
-                            controller: street,
-                            decoration: InputDecoration(
-                              hintText: "Street, Society or Landmark",
-                              border: InputBorder.none,
-                              hintStyle: GoogleFonts.sourceSans3(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black,
-                                letterSpacing: 1,
-                                fontSize: 12,
-                                //fontWeight: FontWeight.bold,
-                              ),                            ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Colors.black)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: TextField(
+                          controller: street,
+                          decoration: InputDecoration(
+                            hintText: "Street, Society or Landmark",
+                            border: InputBorder.none,
+                            hintStyle: GoogleFonts.sourceSans3(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                              letterSpacing: 1,
+                              fontSize: 12,
+                            ),
                           ),
-                        )),
+                        ),
+                      ),
+                    ),
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
@@ -332,14 +309,16 @@ class _MapScreenState extends State<MapScreen> {
                       },
                       child: Container(
                         child: Center(
-                            child: Text('Add Address',
-                                style: GoogleFonts.sourceSans3(
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white,
-                                  letterSpacing: 1,
-                                  fontSize: 15,
-                                  //fontWeight: FontWeight.bold,
-                                ),)),
+                          child: Text(
+                            'Add Address',
+                            style: GoogleFonts.sourceSans3(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                              letterSpacing: 1,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
                         height: 60,
                         color: Colors.black,
                       ),
@@ -352,31 +331,3 @@ class _MapScreenState extends State<MapScreen> {
         ));
   }
 }
-
-//
-// Container(
-// padding: EdgeInsets.all(10),
-// color: Colors.white,
-// child: Text(
-// _currentAddress!,
-// style: TextStyle(fontSize: 16, color: Colors.black),
-// ),
-// ),
-
-// _loading
-// ? Center(child: CircularProgressIndicator())
-//     :
-//
-// GoogleMap(
-// initialCameraPosition: CameraPosition(
-// target: _currentPosition,
-// zoom: 14.0,
-// ),
-// myLocationEnabled: true,
-// myLocationButtonEnabled: true,
-// onMapCreated: (GoogleMapController controller) {
-// _controller = controller;
-// },
-// ),
-
-

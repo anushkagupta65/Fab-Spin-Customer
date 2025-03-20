@@ -1,14 +1,11 @@
 import 'dart:convert';
-
 import 'package:fabspin/Screens/maps.dart';
 import 'package:fabspin/Screens/updateaddress.dart';
 import 'package:fabspin/Screens/wallet_history.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import '../tabs/custom_drawer.dart';
 import 'notificaton_screen.dart';
 
@@ -65,23 +62,13 @@ class _AddAddressState extends State<AddAddress> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     fetchCustomerAddress(userId);
-  }
-
-  Future<void> _getAddressFromPreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _storedAddress = prefs.getString('userAddress') ?? 'No address found';
-      //_loc.text = _storedAddress ?? 'No address found';
-    });
   }
 
   void _onAddressSelected(String address) {
     setState(() {
       _storedAddress = address;
-      //_loc.text = address;
     });
   }
 
@@ -91,21 +78,18 @@ class _AddAddressState extends State<AddAddress> {
   }) async {
     final url = Uri.parse('https://fabspin.org/api/set-default-address');
 
-    // Define the request body
     final body = {
       'customer_id': customerId.toString(),
       'address_id': addressId.toString(),
     };
 
     try {
-      // Make the POST request
       final response = await http.post(
         url,
         headers: {'Content-Type': 'application/json'},
         body: json.encode(body),
       );
 
-      // Handle the response
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
         if (responseData['Status'] == 'Success') {
@@ -136,7 +120,6 @@ class _AddAddressState extends State<AddAddress> {
             color: Colors.white,
             letterSpacing: 1,
             fontSize: 20,
-            //fontWeight: FontWeight.bold,
           ),
         )),
         centerTitle: true,
@@ -189,15 +172,6 @@ class _AddAddressState extends State<AddAddress> {
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
                   onTap: () {
-                    // showModalBottomSheet(
-                    //     context: context,
-                    //     builder: (builder) {
-                    //   return Container(
-                    //     color: Colors.black,
-                    //     height: 250,
-                    //   );
-                    // });
-
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -230,7 +204,6 @@ class _AddAddressState extends State<AddAddress> {
                               color: Colors.white,
                               letterSpacing: 1,
                               fontSize: 15,
-                              //fontWeight: FontWeight.bold,
                             ),
                           ),
                         ],
@@ -252,7 +225,6 @@ class _AddAddressState extends State<AddAddress> {
                       color: Colors.grey,
                       letterSpacing: 1,
                       fontSize: 15,
-                      //fontWeight: FontWeight.bold,
                     ),
                   ),
                   Expanded(child: Divider())
@@ -286,18 +258,14 @@ class _AddAddressState extends State<AddAddress> {
                             color: Colors.grey.withOpacity(0.4),
                             spreadRadius: 2,
                             blurRadius: 3,
-                            //offset: Offset(0, 3),
                           )
                         ],
-                        //border: Border.all(color: Colors.black),
                         borderRadius: BorderRadius.circular(19.0),
                       ),
-                      //color: isSelected ? Colors.black : Colors.white,
                       child: Padding(
                         padding: const EdgeInsets.all(15),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Icon(
                               Icons.home,
@@ -328,17 +296,21 @@ class _AddAddressState extends State<AddAddress> {
                                     'Edit',
                                     style: GoogleFonts.sourceSans3(
                                       fontWeight: FontWeight.w500,
-                                      color:
-                                          isSelected ? Colors.white : Colors.grey,
+                                      color: isSelected
+                                          ? Colors.white
+                                          : Colors.grey,
                                       letterSpacing: 1,
                                       fontSize: 15,
                                     ),
                                   ),
-                                  onTap: (){
+                                  onTap: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => Updateaddress(onAddressSelected: _onAddressSelected, addressId: addressID.toString(),),
+                                        builder: (context) => Updateaddress(
+                                          onAddressSelected: _onAddressSelected,
+                                          addressId: addressID.toString(),
+                                        ),
                                       ),
                                     );
                                   },
@@ -357,16 +329,6 @@ class _AddAddressState extends State<AddAddress> {
                                       )
                               ],
                             ),
-
-                            // Text(
-                            //   isSelected ? 'Selected' : 'Select',
-                            //   style: GoogleFonts.sourceSans3(
-                            //     fontWeight: FontWeight.w500,
-                            //     color: isSelected ? Colors.blue : Colors.grey,
-                            //     letterSpacing: 1,
-                            //     fontSize: 15,
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),

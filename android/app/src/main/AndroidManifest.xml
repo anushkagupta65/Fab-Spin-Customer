@@ -1,10 +1,14 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fabspin.drycleaners">
 
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
     <uses-feature
         android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
         android:required="false" />
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -18,13 +22,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.RECEIVE_NOTIFICATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
-
-
-
-
-
 
     <!-- Provide required visibility configuration for API level 30 and above -->
     <queries>
@@ -44,8 +41,7 @@
         </intent>
     </queries>
     <application
-        android:hardwareAccelerated="true"
-        android:label="fabspin"
+        android:label="Fab Spin Drycleaners"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <meta-data

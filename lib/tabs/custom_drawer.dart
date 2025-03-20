@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:fabspin/Screens/bottomnavigation.dart';
 import 'package:fabspin/Screens/contact_us.dart';
 import 'package:fabspin/Screens/my_request.dart';
@@ -15,12 +13,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import '../Screens/home_page.dart';
 import '../Splash/splash_screen.dart';
 import '../Urls/urls.dart';
 
 class CustomDrawer extends StatefulWidget {
-
   const CustomDrawer({super.key});
 
   @override
@@ -35,7 +31,7 @@ int? userId;
 String? profileImg;
 String _userEmail =
     'Sector 62 C Block Phase 2 Industrial Area Sector 62 Noida Uttar Pradesh';
-late String   walletAmount = "0.00";
+late String walletAmount = "0.00";
 
 class _CustomDrawerState extends State<CustomDrawer> {
   Future<void> _handleLogout() async {
@@ -52,7 +48,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       _userName = prefs.getString('name') ?? 'U S E R N A M E';
-      //_userEmail = prefs.getString('email') ?? 'Sector 62 C Block Phase 2 Industrial Area Sector 62 Noida Uttar Pradesh';
       _address = prefs.getString('userAddress') ?? 'Address';
       userId = prefs.getInt('user_id');
       profileImg = prefs.getString('profileImg');
@@ -103,15 +98,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
           );
           print(responseData['customer']['address']);
           print(prefs.getString('userAddress'));
-          await prefs.setString('userGst', responseData['customer']['customer_gst']);
+          await prefs.setString(
+              'userGst', responseData['customer']['customer_gst']);
           await prefs.setString('profileImg',
               "https://fabspin.org/public/${responseData['customer']['profilepic']}");
-
 
           await prefs.setString('userLat', responseData['customer']['lat']);
           await prefs.setString('userLong', responseData['customer']['long']);
 
-          // Reload the user data to update the UI
           setState(() {
             _loadUserData();
           });
@@ -124,7 +118,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getUser();
     _loadUserData();
@@ -143,7 +136,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
             Container(
               color: Colors.black,
               child: Padding(
-                padding: const EdgeInsets.only(left: 10.0, top: 30,),
+                padding: const EdgeInsets.only(
+                  left: 10.0,
+                  top: 30,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -153,21 +149,19 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       child: ClipOval(
                         child: profileImg != null && profileImg!.isNotEmpty
                             ? Image.network(
-                          profileImg!,
-                          fit: BoxFit.cover,
-                          width: 70,
-                          height: 70,
-                        )
+                                profileImg!,
+                                fit: BoxFit.cover,
+                                width: 70,
+                                height: 70,
+                              )
                             : Image.asset(
-                          'assets/images/Fabspin.png',  // Add a local default image in assets
-                          fit: BoxFit.cover,
-                          width: 70,
-                          height: 70,
-                        ),
+                                'assets/images/Fabspin.png',
+                                fit: BoxFit.cover,
+                                width: 70,
+                                height: 70,
+                              ),
                       ),
                     ),
-
-                    // const SizedBox(width: 30),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,7 +173,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
                               color: Colors.white,
                               letterSpacing: 1,
                               fontSize: 15,
-                              //fontWeight: FontWeight.bold,
                             ),
                           ),
                           SizedBox(
@@ -194,7 +187,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                 color: Colors.white.withOpacity(0.6),
                                 letterSpacing: 1,
                                 fontSize: 12,
-                                //fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.left,
                             ),
@@ -205,13 +197,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           Padding(
                             padding: const EdgeInsets.only(right: 5),
                             child: Text(
-                              "Wallet: Rs. ${walletAmount}" ?? "0.00",
+                              "Wallet: Rs. ${walletAmount}",
                               style: GoogleFonts.sourceSans3(
                                 fontWeight: FontWeight.w500,
                                 color: Colors.white,
                                 letterSpacing: 1,
                                 fontSize: 12,
-                                //fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.left,
                             ),
@@ -235,7 +226,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 });
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const Bottomnavigation()),
+                  MaterialPageRoute(
+                      builder: (context) => const Bottomnavigation()),
                 );
               },
             ),
@@ -422,7 +414,6 @@ Widget _buildMenuItem({
                   color: isActive ? Colors.white : Colors.black,
                   letterSpacing: 1,
                   fontSize: 15,
-                  //fontWeight: FontWeight.bold,
                 ),
               ),
             ],

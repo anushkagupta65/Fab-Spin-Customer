@@ -1,0 +1,2 @@
+C:/Users/DELL/Desktop/projects/fabspincustomer/android/app/.cxx/RelWithDebInfo/2h6u45c4/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/DELL/Desktop/projects/fabspincustomer/android/app/.cxx/RelWithDebInfo/2h6u45c4/arm64-v8a/CMakeFiles/rebuild_cache.dir

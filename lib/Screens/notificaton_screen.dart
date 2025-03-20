@@ -1,7 +1,4 @@
 import 'dart:convert';
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,7 +12,8 @@ class NotificationScreen extends StatefulWidget {
 
 class _NotificationScreenState extends State<NotificationScreen> {
   List<NotificationModel> _notifications = [];
-  final PushNotificationService _notificationService = PushNotificationService();
+  final PushNotificationService _notificationService =
+      PushNotificationService();
 
   @override
   void initState() {
@@ -59,13 +57,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text("Notifications", style: GoogleFonts.sourceSans3(
-          fontWeight: FontWeight.w500,
-          color: Colors.white,
-          letterSpacing: 1,
-          fontSize: 20,
-          //fontWeight: FontWeight.bold,
-        ),),
+        title: Text(
+          "Notifications",
+          style: GoogleFonts.sourceSans3(
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+            letterSpacing: 1,
+            fontSize: 20,
+          ),
+        ),
         iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
       ),
@@ -80,33 +80,36 @@ class _NotificationScreenState extends State<NotificationScreen> {
         //   ),
         //),
         child: _notifications.isEmpty
-            ? Center(child: Text("No notifications yet", style: GoogleFonts.sourceSans3(
-          fontWeight: FontWeight.w500,
-          color: Colors.black,
-          letterSpacing: 1,
-          fontSize: 15,
-          //fontWeight: FontWeight.bold,
-        ),))
-            : SingleChildScrollView(
-          child: ListView.builder(
-            shrinkWrap: true,
-            reverse: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: _notifications.length,
-            itemBuilder: (context, index) {
-              return Card(
-                color: Colors.white,
-                child: ListTile(
-                  title: Text(_notifications[index].title),
-                  subtitle: Text(_notifications[index].body),
-                  leading: _notifications[index].imageUrl.isNotEmpty
-                      ? Image.network(_notifications[index].imageUrl)
-                      : null,
+            ? Center(
+                child: Text(
+                "No notifications yet",
+                style: GoogleFonts.sourceSans3(
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black,
+                  letterSpacing: 1,
+                  fontSize: 15,
                 ),
-              );
-            },
-          ),
-        ),
+              ))
+            : SingleChildScrollView(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  reverse: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: _notifications.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      color: Colors.white,
+                      child: ListTile(
+                        title: Text(_notifications[index].title),
+                        subtitle: Text(_notifications[index].body),
+                        leading: _notifications[index].imageUrl.isNotEmpty
+                            ? Image.network(_notifications[index].imageUrl)
+                            : null,
+                      ),
+                    );
+                  },
+                ),
+              ),
       ),
     );
   }

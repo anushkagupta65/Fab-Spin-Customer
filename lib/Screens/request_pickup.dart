@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:fabspin/Screens/schedule_pickup.dart';
-import 'package:fabspin/Screens/service_details.dart';
 import 'package:fabspin/Screens/wallet_history.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -43,7 +41,6 @@ class _RequestPickupState extends State<RequestPickup> {
     }
   }
 
-
   List<Map<String, dynamic>> serviceImage = [
     {
       'imageUrl': 'assets/icon/dry-clean-icon.png',
@@ -51,13 +48,9 @@ class _RequestPickupState extends State<RequestPickup> {
     {
       'imageUrl': 'assets/icon/shoe-cleaning-icon.png',
     },
-
     {
       'imageUrl': 'assets/icon/steam-iron-icon.png',
     },
-
-
-
   ];
 
   @override
@@ -74,7 +67,6 @@ class _RequestPickupState extends State<RequestPickup> {
             color: Colors.white,
             letterSpacing: 1,
             fontSize: 20,
-            //fontWeight: FontWeight.bold,
           ),
         )),
         iconTheme: IconThemeData(color: Colors.white),
@@ -82,7 +74,10 @@ class _RequestPickupState extends State<RequestPickup> {
         actions: [
           Badge(
             backgroundColor: Colors.grey,
-            label: Text(walletAmount.substring(0, walletAmount.length -3), style: TextStyle(color: Colors.white),),
+            label: Text(
+              walletAmount.substring(0, walletAmount.length - 3),
+              style: TextStyle(color: Colors.white),
+            ),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -95,7 +90,9 @@ class _RequestPickupState extends State<RequestPickup> {
               child: Icon(Ionicons.wallet_outline, color: Colors.white),
             ),
           ),
-          SizedBox(width: 20,),
+          SizedBox(
+            width: 20,
+          ),
           InkWell(
             onTap: () {
               Navigator.push(
@@ -107,20 +104,15 @@ class _RequestPickupState extends State<RequestPickup> {
             },
             child: Icon(Ionicons.notifications_outline, color: Colors.white),
           ),
-          SizedBox(width: 10,)
+          SizedBox(
+            width: 10,
+          )
         ],
       ),
       drawer: CustomDrawer(),
       body: Container(
         color: Colors.white,
-        // decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //     opacity: 0.09,
-        //     image: AssetImage("assets/images/bg.jpg"),
-        //     fit: BoxFit.cover,
-        //   ),),
         child: Column(
-          //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: Padding(
@@ -128,7 +120,9 @@ class _RequestPickupState extends State<RequestPickup> {
                 child: Container(
                   child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20),
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 20,
+                          crossAxisSpacing: 20),
                       itemCount: serviceNames.length,
                       itemBuilder: (BuildContext context, index) {
                         final service = serviceNames[index];
@@ -142,27 +136,22 @@ class _RequestPickupState extends State<RequestPickup> {
                                 color: Colors.grey.withOpacity(0.4),
                                 spreadRadius: 2,
                                 blurRadius: 3,
-                                //offset: Offset(0, 3),
                               )
                             ],
                             borderRadius: BorderRadius.circular(19.0),
                           ),
                           child: InkWell(
-                            onTap: (){
+                            onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context    ) =>  SchedulePickup(
-                                    id: service['id'])),
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        SchedulePickup(id: service['id'])),
                               );
                             },
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                // Image.asset(
-                                //   serviceIcons[index],
-                                //   width: 60,
-                                //   height: 60,
-                                // ),
                                 Expanded(
                                   child: Image.asset(
                                     serviceImage[index]['imageUrl'].toString(),
@@ -170,22 +159,20 @@ class _RequestPickupState extends State<RequestPickup> {
                                     height: 120,
                                   ),
                                 ),
-                                // Image.network(image,width: 120,
-                                //   height: 120,),
                                 const SizedBox(height: 8.0),
                                 Text(
-                                  //serviceNames[index].toString(),
                                   finalserv,
                                   style: GoogleFonts.sourceSans3(
                                     fontWeight: FontWeight.w700,
                                     color: Colors.black,
                                     letterSpacing: 1,
                                     fontSize: 15,
-                                    //fontWeight: FontWeight.bold,
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
-                                SizedBox(height: 5,)
+                                SizedBox(
+                                  height: 5,
+                                )
                               ],
                             ),
                           ),
@@ -194,19 +181,6 @@ class _RequestPickupState extends State<RequestPickup> {
                 ),
               ),
             ),
-            // Align(
-            //   alignment: Alignment.bottomCenter,
-            //   child: InkWell(
-            //     onTap: (){},
-            //     child: Container(
-            //       child: Center(
-            //           child:
-            //               Text('Proceed', style: TextStyle(color: Colors.white))),
-            //       height: 60,
-            //       color: Colors.black,
-            //     ),
-            //   ),
-            // )
           ],
         ),
       ),

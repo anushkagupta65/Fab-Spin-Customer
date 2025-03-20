@@ -1,42 +1,122 @@
 plugins {
-    id "com.android.application" version "8.1.0" // Matches root build.gradle
-    id "org.jetbrains.kotlin.android" version "1.9.22" // Matches ext.kotlin_version
-    id "dev.flutter.flutter-gradle-plugin" // Managed by Flutter SDK
-    id "com.google.gms.google-services" // Managed by root build.gradle (4.4.1)
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
 }
 
-def localProperties = new Properties()
-def localPropertiesFile = rootProject.file('local.properties')
-if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader('UTF-8') { reader ->
-        localProperties.load(reader)
-    }
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+} else {
+    println "WARNING: key.properties not found, release signing may fail!"
 }
 
 android {
-    namespace "com.fabspin.drycleaners"
-    compileSdk 34
-    defaultConfig {
-        applicationId "com.fabspin.drycleaners"
-        minSdk 21
-        targetSdk 34
-        versionCode 1
-        versionName "1.0"
-        multiDexEnabled true
-    }
+    namespace = "com.fabspin.drycleaners"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.fabspin.drycleaners"
+        minSdk = 23
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    signingConfigs {
+        release {
+            if (keystorePropertiesFile.exists()) {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            } else {
+                println "WARNING: Keystore not found, release build may fail!"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            shrinkResources false
+            minifyEnabled false
+        }
     }
 }
 
 flutter {
-    source "../.."
+    source = "../.."
 }
 
 dependencies {
-    implementation "androidx.multidex:multidex:2.0.1"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.0"
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation platform("com.google.firebase:firebase-bom:33.5.1")
+    implementation "com.google.firebase:firebase-analytics"
 }
+
+
+
+// plugins {
+//     id "com.android.application"
+//     id "org.jetbrains.kotlin.android" version "1.9.22" apply false
+//     id "dev.flutter.flutter-gradle-plugin"
+//     id "com.google.gms.google-services"
+// }
+
+// def localProperties = new Properties()
+// def localPropertiesFile = rootProject.file('local.properties')
+// if (localPropertiesFile.exists()) {
+//     localPropertiesFile.withReader('UTF-8') { reader ->
+//         localProperties.load(reader)
+//     }
+// }
+
+// android {
+//     namespace "com.fabspin.drycleaners"
+//     compileSdk 34
+
+//     compileOptions {
+//         sourceCompatibility JavaVersion.VERSION_17
+//         targetCompatibility JavaVersion.VERSION_17
+//     }
+
+//     kotlin { jvmTarget = "17" }
+
+//     defaultConfig {
+//         applicationId "com.fabspin.drycleaners"
+//         minSdk 21
+//         targetSdk 34
+//         versionCode 1
+//         versionName "1.0"
+//         multiDexEnabled true
+//     }
+
+//     buildTypes {
+//         release {
+//             signingConfig signingConfigs.debug // Update this for release builds
+//         }
+//     }
+// }
+
+// flutter {
+//     source "../.."
+// }
+
+// dependencies {
+//     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.22"
+//     implementation "androidx.multidex:multidex:2.0.1"
+// }

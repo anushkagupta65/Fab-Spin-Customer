@@ -16,8 +16,8 @@ class Bottomnavigation extends StatefulWidget {
 class _BottomnavigationState extends State<Bottomnavigation> {
   int _selectedIndex = 0; // This variable tracks the selected tab index
   final List<Widget> _pages = [
-    Home(),    // 0: Home
-    Setting(),  // 1: Settings
+    Home(), // 0: Home
+    Setting(), // 1: Settings
   ];
 
   void _onItemTapped(int index) {
@@ -76,18 +76,16 @@ class _BottomnavigationState extends State<Bottomnavigation> {
         selectedItemColor: Colors.grey,
         unselectedItemColor: Colors.white,
         selectedLabelStyle: GoogleFonts.sourceSans3(
-        fontWeight: FontWeight.w500,
-        color: Colors.grey,
-        letterSpacing: 1,
-        fontSize: 12,
-        //fontWeight: FontWeight.bold,
-      ),
+          fontWeight: FontWeight.w500,
+          color: Colors.grey,
+          letterSpacing: 1,
+          fontSize: 12,
+        ),
         unselectedLabelStyle: GoogleFonts.sourceSans3(
           fontWeight: FontWeight.w500,
           color: Colors.grey,
           letterSpacing: 1,
           fontSize: 12,
-          //fontWeight: FontWeight.bold,
         ),
         unselectedIconTheme: IconThemeData(color: Colors.white),
         selectedIconTheme: IconThemeData(color: Colors.grey),

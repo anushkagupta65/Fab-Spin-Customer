@@ -1,7 +1,5 @@
-import 'package:fabspin/Screens/home_page.dart';
 import 'package:fabspin/Screens/login_screen.dart';
 import 'package:flutter/material.dart';
-import "package:fabspin/Urls/urls.dart";
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Screens/bottomnavigation.dart';
@@ -14,16 +12,14 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
-  
-    _checkLoginStatus();
 
+    _checkLoginStatus();
   }
 
-  _promo()async{
+  _promo() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setBool('is_first_loaded', true);
   }
@@ -39,10 +35,10 @@ class _SplashScreenState extends State<SplashScreen> {
   //       MaterialPageRoute(builder: (context) => const Home()),
   //     );
   //   } else {
-    //     Navigator.pushReplacement(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => const LoginScreen()),
-    //     );
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(builder: (context) => const LoginScreen()),
+  //     );
   //   }
   // }
 
@@ -53,14 +49,13 @@ class _SplashScreenState extends State<SplashScreen> {
     final userId = prefs.getInt('user_id');
 
     if (userId != null) {
-      
       // Navigator.pushReplacement(
       //   context,
       //   MaterialPageRoute(builder: (context) =>  Home()),
       // );
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) =>  Bottomnavigation()),
+        MaterialPageRoute(builder: (context) => Bottomnavigation()),
       );
       _promo();
     } else {
@@ -72,8 +67,6 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +75,11 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/icon/fabspinsplash.png", width: double.infinity, height: 300,)
+            Image.asset(
+              "assets/icon/fabspinsplash.png",
+              width: double.infinity,
+              height: 300,
+            )
             // Image.network(
             //   Urls.splashLogo,
             //   width: 300,

@@ -48,7 +48,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     }
   }
 
-
   @override
   void initState() {
     super.initState();
@@ -58,28 +57,24 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.9),
+      backgroundColor: Colors.white.withValues(alpha: 0.9),
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Order Details', style: GoogleFonts.sourceSans3(
-          fontWeight: FontWeight.w500,
-          color: Colors.white,
-          letterSpacing: 1,
-          fontSize: 20,
-          //fontWeight: FontWeight.bold,
-        ),),
+        title: Text(
+          'Order Details',
+          style: GoogleFonts.sourceSans3(
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+            letterSpacing: 1,
+            fontSize: 20,
+          ),
+        ),
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.white),
       ),
       body: Container(
         height: double.infinity,
         color: Colors.white,
-        // decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //     opacity: 0.09,
-        //     image: AssetImage("assets/images/bg.jpg"),
-        //     fit: BoxFit.cover,
-        //   ),),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,14 +89,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       color: Colors.black,
                       letterSpacing: 1,
                       fontSize: 12,
-                      //fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 Divider(),
                 ListView.builder(
-                  physics: NeverScrollableScrollPhysics(), // Disable scroll on ListView.builder
-                  shrinkWrap: true, // Make ListView fit the content
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
                   itemCount: bookingDetails.length,
                   itemBuilder: (context, index) {
                     final bookingDetail = bookingDetails[index];
@@ -113,7 +107,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('${index + 1}.'),
-                            SizedBox(width: 2,),
+                            SizedBox(
+                              width: 2,
+                            ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -128,30 +124,27 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                 Text(
                                   'Category : ${bookingDetail['subtrade_name']}',
                                   style: GoogleFonts.sourceSans3(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12
-                                  ),
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12),
                                 ),
                                 Text(
                                   'Item Name: ${bookingDetail['cloth_name']}',
                                   style: GoogleFonts.sourceSans3(
-                                    fontWeight: FontWeight.w400,
-                                      fontSize: 12
-                                  ),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 12),
                                 ),
                                 Text(
                                   'Status: ${bookingDetail['status']}',
                                   style: GoogleFonts.sourceSans3(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 12,
-                                    color: _getStatusColor(bookingDetail['status']),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
+                                    color: _getStatusColor(
+                                        bookingDetail['status']),
                                   ),
                                 ),
-                                //Divider(color: Colors.black,)
                               ],
                             ),
-
                           ],
                         ),
                       ),
@@ -159,7 +152,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   },
                 ),
                 SizedBox(height: 10),
-
                 Padding(
                   padding: const EdgeInsets.only(left: 12, bottom: 10),
                   child: Text(
@@ -167,8 +159,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     style: GoogleFonts.sourceSans3(
                         fontSize: 15,
                         color: Colors.black,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
@@ -179,15 +170,21 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(bookingDetails[0]['full_address'] ?? 'No Address Found',style: GoogleFonts.sourceSans3(fontWeight: FontWeight.w400,
-                            fontSize: 12),),
-                        Text(bookingDetails[0]['mobile'], style: GoogleFonts.sourceSans3(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                          letterSpacing: 1,
-                          fontSize: 12,
-                          //fontWeight: FontWeight.bold,
-                        ),),
+                        Text(
+                          bookingDetails[0]['full_address'] ??
+                              'No Address Found',
+                          style: GoogleFonts.sourceSans3(
+                              fontWeight: FontWeight.w400, fontSize: 12),
+                        ),
+                        Text(
+                          bookingDetails[0]['mobile'],
+                          style: GoogleFonts.sourceSans3(
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                            letterSpacing: 1,
+                            fontSize: 12,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -197,7 +194,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   padding: const EdgeInsets.only(left: 12, bottom: 10),
                   child: Text(
                     'Price Details',
-                    style: GoogleFonts.sourceSans3(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 15),
+                    style: GoogleFonts.sourceSans3(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15),
                   ),
                 ),
                 Container(
@@ -213,11 +213,31 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text('Discount: ', style: GoogleFonts.sourceSans3(fontWeight: FontWeight.bold, fontSize: 12),),
-                              Text('SGst: ',style: GoogleFonts.sourceSans3(fontWeight: FontWeight.bold, fontSize: 12),),
-                              Text('CGst: ',style: GoogleFonts.sourceSans3(fontWeight: FontWeight.bold, fontSize: 12),),
-                              Text('Amount Paid: ',style: GoogleFonts.sourceSans3(fontWeight: FontWeight.bold, fontSize: 12),),
-                              Text('Amount Due: ',style: GoogleFonts.sourceSans3(fontWeight: FontWeight.bold, fontSize: 12),),
+                              Text(
+                                'Discount: ',
+                                style: GoogleFonts.sourceSans3(
+                                    fontWeight: FontWeight.bold, fontSize: 12),
+                              ),
+                              Text(
+                                'SGst: ',
+                                style: GoogleFonts.sourceSans3(
+                                    fontWeight: FontWeight.bold, fontSize: 12),
+                              ),
+                              Text(
+                                'CGst: ',
+                                style: GoogleFonts.sourceSans3(
+                                    fontWeight: FontWeight.bold, fontSize: 12),
+                              ),
+                              Text(
+                                'Amount Paid: ',
+                                style: GoogleFonts.sourceSans3(
+                                    fontWeight: FontWeight.bold, fontSize: 12),
+                              ),
+                              Text(
+                                'Amount Due: ',
+                                style: GoogleFonts.sourceSans3(
+                                    fontWeight: FontWeight.bold, fontSize: 12),
+                              ),
                               SizedBox(height: 5),
                               Divider(
                                 color: Colors.grey, // Set the color of the line
@@ -225,36 +245,54 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                 height: 20,
                               ),
                               SizedBox(height: 5),
-                              Text('Total: ',style: GoogleFonts.sourceSans3(fontWeight: FontWeight.bold),),
-
+                              Text(
+                                'Total: ',
+                                style: GoogleFonts.sourceSans3(
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ],
                           ),
-                        ),Expanded(
+                        ),
+                        Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                "Rs. ${bookingDetails[0]['discount'].toString()}", style: GoogleFonts.sourceSans3(fontSize: 12, fontWeight: FontWeight.w400),
-                              ),Text(
-                                "Rs. ${bookingDetails[0]['sgst'].toString()}",style: GoogleFonts.sourceSans3(fontSize: 12, fontWeight: FontWeight.w400),
-                              ),Text(
-                                "Rs. ${bookingDetails[0]['cgst'].toString()}",style: GoogleFonts.sourceSans3(fontSize: 12, fontWeight: FontWeight.w400),
-                              ),Text(
-                                "Rs. ${bookingDetails[0]['order_amount_paid'].toString()}" ?? '0',style: GoogleFonts.sourceSans3(fontSize: 12, fontWeight: FontWeight.w400),
-                              ),Text(
-                                "Rs. ${bookingDetails[0]['order_total_amount_due'].toString()}" ?? '0',style: GoogleFonts.sourceSans3(fontSize: 12, fontWeight: FontWeight.w400),
+                                "Rs. ${bookingDetails[0]['discount'].toString()}",
+                                style: GoogleFonts.sourceSans3(
+                                    fontSize: 12, fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                "Rs. ${bookingDetails[0]['sgst'].toString()}",
+                                style: GoogleFonts.sourceSans3(
+                                    fontSize: 12, fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                "Rs. ${bookingDetails[0]['cgst'].toString()}",
+                                style: GoogleFonts.sourceSans3(
+                                    fontSize: 12, fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                "Rs. ${bookingDetails[0]['order_amount_paid'].toString()}",
+                                style: GoogleFonts.sourceSans3(
+                                    fontSize: 12, fontWeight: FontWeight.w400),
+                              ),
+                              Text(
+                                "Rs. ${bookingDetails[0]['order_total_amount_due'].toString()}",
+                                style: GoogleFonts.sourceSans3(
+                                    fontSize: 12, fontWeight: FontWeight.w400),
                               ),
                               SizedBox(height: 5),
                               Divider(
                                 color: Colors.grey, // Set the color of the line
                                 thickness: 1, // Set the thickness of the line
-                                height: 20,                          ),
+                                height: 20,
+                              ),
                               SizedBox(height: 5),
                               Text(
                                 "Rs. ${bookingDetails[0]['order_total_after_tax'].toString()}",
                               ),
-
                             ],
                           ),
                         ),

@@ -140,11 +140,6 @@
 
 // // new code defined on 5 sept 2024 with api
 
-
-
-
-
-
 import 'dart:convert';
 import 'package:fabspin/Screens/terms_condition.dart';
 import 'package:fabspin/Screens/verify_otp.dart';
@@ -248,7 +243,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.white,
                   letterSpacing: 2,
                   fontSize: 15,
-                  //fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 30),
@@ -258,12 +252,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 decoration: InputDecoration(
                   hintText: 'Enter Phone Number',
-                  hintStyle:  GoogleFonts.sourceSans3(
+                  hintStyle: GoogleFonts.sourceSans3(
                     fontWeight: FontWeight.w300,
                     color: Colors.white,
                     letterSpacing: 1,
                     fontSize: 15,
-                    //fontWeight: FontWeight.bold,
                   ),
                   filled: true,
                   fillColor: Colors.white.withOpacity(0.3),
@@ -271,8 +264,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.circular(8.0),
                     borderSide: BorderSide.none,
                   ),
-                  contentPadding:
-                  const EdgeInsets.symmetric(vertical: 15.0, horizontal: 20.0),
+                  contentPadding: const EdgeInsets.symmetric(
+                      vertical: 15.0, horizontal: 20.0),
                 ),
                 style: GoogleFonts.barlow(color: Colors.white),
               ),
@@ -297,7 +290,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  TermsAndConditionsPage(),
+                          builder: (context) => TermsAndConditionsPage(),
                         ),
                       );
                     },
@@ -308,7 +301,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: Colors.white,
                         letterSpacing: 1,
                         fontSize: 12,
-                        //fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
@@ -334,7 +326,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.black,
                     letterSpacing: 1,
                     fontSize: 15,
-                    //fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
